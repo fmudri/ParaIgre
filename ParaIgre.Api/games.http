@@ -1,0 +1,2 @@
+// Interakcija sa API-jem na ovaj nacin jer je browser limitiran
+GET http://localhost:5165
