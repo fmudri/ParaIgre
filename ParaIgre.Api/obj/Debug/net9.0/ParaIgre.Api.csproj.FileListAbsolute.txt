@@ -26,3 +26,4 @@ D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\refint\ParaIgre.Api.dll
 D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ParaIgre.Api.pdb
 D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ParaIgre.Api.genruntimeconfig.cache
 D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ref\ParaIgre.Api.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ParaIgre.Api.sourcelink.json
