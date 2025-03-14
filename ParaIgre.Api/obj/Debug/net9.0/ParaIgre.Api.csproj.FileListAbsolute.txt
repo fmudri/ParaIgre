@@ -27,3 +27,9 @@ D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ParaIgre.Api.pdb
 D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ParaIgre.Api.genruntimeconfig.cache
 D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ref\ParaIgre.Api.dll
 D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ParaIgre.Api.sourcelink.json
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\MinimalApis.Extensions.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\MiniValidation.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ParaIgre.Api.csproj.AssemblyReference.cache
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ParaIgre.Api.MvcApplicationPartsAssemblyInfo.cs
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\obj\Debug\net9.0\ParaIgre.0267A38E.Up2Date

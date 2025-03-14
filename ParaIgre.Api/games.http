@@ -11,14 +11,14 @@ Content-Type: application/json
 {
     "name": "Metin2",
     "tags": "MMORPG, Open-World",
-    "price": 2.99,
+    "price": 0,
     "releaseDate": "2004-07-02",
     "description": "Defeat the vile stones that have corrupted your land",
     "studio": "Gameforge"
 }
 
 ###
-PUT http://localhost:5165/games/5
+PUT http://localhost:5165/games/3
 Content-Type: application/json
 
 {

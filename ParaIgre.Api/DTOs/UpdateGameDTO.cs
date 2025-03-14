@@ -1,11 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ParaIgre.Api.DTOs;
 
 public record class UpdateGameDTO
 (
-    string Name,
-    string Tags,
-    decimal Price,
+    [Required][StringLength(50)]string Name,
+    [Required][StringLength(100)]string Tags,
+    [Required][Range(0, 1000)]decimal Price,
     DateOnly ReleaseDate,
-    string Description,
-    string Studio
+    [Required][StringLength(250)]string Description,
+    [Required][StringLength(50)]string Studio
 );
