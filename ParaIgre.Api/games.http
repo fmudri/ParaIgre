@@ -2,16 +2,16 @@
 GET http://localhost:5165/games
 
 ###
-GET http://localhost:5165/games/4
+GET http://localhost:5165/games/3
 
 ###
 POST http://localhost:5165/games
 Content-Type: application/json
 
 {
-    "name": "Metin2",
-    "tags": "MMORPG, Open-World",
-    "price": 0,
+    "name": "Candy Crush",
+    "tagId": 5,
+    "price": 10.99,
     "releaseDate": "2004-07-02",
     "description": "Defeat the vile stones that have corrupted your land",
     "studio": "Gameforge"
@@ -22,8 +22,8 @@ PUT http://localhost:5165/games/3
 Content-Type: application/json
 
 {
-    "name": "Crash Bandicoot Trilogy",
-    "tags": "Arcade, Adventure, Platformer, Singleplayer",
+    "name": "New world",
+    "tagId": 1,
     "price": 19.99,
     "releaseDate": "2007-05-15",
     "description": "Fight the evil mastermind to stop him from gaining world control!",
@@ -31,4 +31,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:5165/games/3
+DELETE http://localhost:5165/games/5

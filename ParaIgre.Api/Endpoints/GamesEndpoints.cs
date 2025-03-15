@@ -1,5 +1,10 @@
 using System;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using ParaIgre.Api.Data;
 using ParaIgre.Api.DTOs;
+using ParaIgre.Api.Entities;
+using ParaIgre.Api.Mapping;
 
 namespace ParaIgre.Api.Endpoints;
 
@@ -7,7 +12,7 @@ public static class GamesEndpoints
 {
     const string GetGameEndpointName = "GetGame";
 
-    private static readonly List<GameDTO> games =
+    private static readonly List<GameSummaryDTO> games =
 [
     new (
             1,
@@ -43,63 +48,52 @@ public static class GamesEndpoints
         var group = app.MapGroup("games").WithParameterValidation();
 
         // GET /games
-        group.MapGet("/", () => games);
+        group.MapGet("/", (ParaIgreContext dbContext) => 
+        dbContext.Games.Include(game => game.Tag).Select(game => game.ToGameSummaryDto()).AsNoTracking());	
 
         // GET/games/1
-        group.MapGet("/{id}", (int id) =>
+        group.MapGet("/{id}", (int id, ParaIgreContext dbContext) =>
         {
-            GameDTO? game = games.Find(game => game.Id == id);
+            Game? game = dbContext.Games.Find(id);
 
-            return game is null ? Results.NotFound() : Results.Ok(game);
+            return game is null ? Results.NotFound() : Results.Ok(game.ToGameDetailsDto());
         })
         .WithName(GetGameEndpointName);
 
         // POST /games
-        group.MapPost("/", (CreateGameDTO newGame) =>
+        group.MapPost("/", (CreateGameDTO newGame, ParaIgreContext dbContext) =>
         {
-            GameDTO game = new
-            (
-                games.Count + 1,
-                newGame.Name,
-                newGame.Tags,
-                newGame.Price,
-                newGame.ReleaseDate,
-                newGame.Description,
-                newGame.Studio
-            );
-            games.Add(game);
 
-            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game);
+            Game game = newGame.ToEntity();
+            game.Tag = dbContext.Tags.Find(newGame.TagId);  
+
+            dbContext.Games.Add(game);
+            dbContext.SaveChanges();
+
+            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game.ToGameDetailsDto());
         });
 
         // PUT /games/1
-        group.MapPut("/{id}", (int id, UpdateGameDTO updatedGame) =>
+        group.MapPut("/{id}", (int id, UpdateGameDTO updatedGame, ParaIgreContext dbContext) =>
         {
-            var index = games.FindIndex(game => game.Id == id);
+            var existingGame = dbContext.Games.Find(id);
 
-            if (index == -1)
+            if (existingGame is null)
             {
                 return Results.NotFound();
             }
 
-            games[index] = new GameDTO
-            (
-                id,
-                updatedGame.Name,
-                updatedGame.Tags,
-                updatedGame.Price,
-                updatedGame.ReleaseDate,
-                updatedGame.Description,
-                updatedGame.Studio
-            );
+            dbContext.Entry(existingGame).CurrentValues.SetValues(updatedGame.ToEntity(id));
+
+            dbContext.SaveChanges();
 
             return Results.NoContent();
         });
 
         // DELETE /games/1
-        group.MapDelete("/{id}", (int id) =>
+        group.MapDelete("/{id}", (int id, ParaIgreContext dbContext) =>
         {
-            games.RemoveAll(game => game.Id == id);
+            dbContext.Games.Where(game => game.Id == id).ExecuteDelete();
 
             return Results.NoContent();
         });

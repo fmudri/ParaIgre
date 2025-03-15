@@ -4,11 +4,11 @@ namespace ParaIgre.Api.DTOs;
 
 // Records are perfect fit for DTOs because they typically commute data without the need for modification
 
-public record class GameDTO
+public record class GameDetailsDTO
 (
     int Id,
     string Name,
-    string Tags,
+    int TagId,
     decimal Price,
     DateOnly ReleaseDate,
     string Description,
