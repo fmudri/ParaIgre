@@ -48,35 +48,35 @@ public static class GamesEndpoints
         var group = app.MapGroup("games").WithParameterValidation();
 
         // GET /games
-        group.MapGet("/", (ParaIgreContext dbContext) => 
-        dbContext.Games.Include(game => game.Tag).Select(game => game.ToGameSummaryDto()).AsNoTracking());	
+        group.MapGet("/", async (ParaIgreContext dbContext) => 
+        await dbContext.Games.Include(game => game.Tag).Select(game => game.ToGameSummaryDto()).AsNoTracking().ToListAsync());	
 
         // GET/games/1
-        group.MapGet("/{id}", (int id, ParaIgreContext dbContext) =>
+        group.MapGet("/{id}", async (int id, ParaIgreContext dbContext) =>
         {
-            Game? game = dbContext.Games.Find(id);
+            Game? game = await dbContext.Games.FindAsync(id);
 
             return game is null ? Results.NotFound() : Results.Ok(game.ToGameDetailsDto());
         })
         .WithName(GetGameEndpointName);
 
         // POST /games
-        group.MapPost("/", (CreateGameDTO newGame, ParaIgreContext dbContext) =>
+        group.MapPost("/", async (CreateGameDTO newGame, ParaIgreContext dbContext) =>
         {
 
             Game game = newGame.ToEntity();
             game.Tag = dbContext.Tags.Find(newGame.TagId);  
 
             dbContext.Games.Add(game);
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game.ToGameDetailsDto());
         });
 
         // PUT /games/1
-        group.MapPut("/{id}", (int id, UpdateGameDTO updatedGame, ParaIgreContext dbContext) =>
+        group.MapPut("/{id}", async (int id, UpdateGameDTO updatedGame, ParaIgreContext dbContext) =>
         {
-            var existingGame = dbContext.Games.Find(id);
+            var existingGame = await dbContext.Games.FindAsync(id);
 
             if (existingGame is null)
             {
@@ -85,15 +85,15 @@ public static class GamesEndpoints
 
             dbContext.Entry(existingGame).CurrentValues.SetValues(updatedGame.ToEntity(id));
 
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             return Results.NoContent();
         });
 
         // DELETE /games/1
-        group.MapDelete("/{id}", (int id, ParaIgreContext dbContext) =>
+        group.MapDelete("/{id}", async (int id, ParaIgreContext dbContext) =>
         {
-            dbContext.Games.Where(game => game.Id == id).ExecuteDelete();
+            await dbContext.Games.Where(game => game.Id == id).ExecuteDeleteAsync();
 
             return Results.NoContent();
         });

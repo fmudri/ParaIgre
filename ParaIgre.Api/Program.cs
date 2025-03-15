@@ -9,7 +9,8 @@ builder.Services.AddSqlite<ParaIgreContext>(connString);
 var app = builder.Build();
 
 app.MapGamesEndpoints();
+app.MapTagsEndpoints();
 
-app.MigrateDb();
+await app.MigrateDbAsync();
 
 app.Run();
