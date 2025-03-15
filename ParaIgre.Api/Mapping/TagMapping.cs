@@ -1,13 +1,23 @@
+// Mapping classes contain extension methods to convert between entities and DTOs
+// This helps isolate the conversion logic and keeps controllers and endpoints clean
+
+
+// Import namespaces for DTOs and entities.
 using System;
-using ParaIgre.Api.DTOs;
-using ParaIgre.Api.Entities;
+using ParaIgre.Api.DTOs;    // Contains TagDTO.
+using ParaIgre.Api.Entities;  // Contains Tag.
 
-namespace ParaIgre.Api.Mapping;
-
-public static class TagMapping
+namespace ParaIgre.Api.Mapping
 {
-    public static TagDTO ToDTO(this Tag tag)
+    // Static class to hold mapping methods for Tag.
+    public static class TagMapping
     {
-        return new TagDTO(tag.Id, tag.Name);
-    } 
+        // Converts a Tag entity to a TagDTO.
+        public static TagDTO ToDTO(this Tag tag)
+        {
+            // Return a new TagDTO with the Tag's Id and Name.
+            return new TagDTO(tag.Id, tag.Name);
+        } 
+    }
 }
+

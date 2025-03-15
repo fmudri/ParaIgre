@@ -1,22 +1,39 @@
+// Endpoints define the HTTP routes (URLs) and actions (methods) for the API
+// They use ASP.NET Core’s routing and minimal API features
+
+
+// Import required namespaces.
 using System;
 using Microsoft.EntityFrameworkCore;
-using ParaIgre.Api.Data;
-using ParaIgre.Api.Mapping;
+using ParaIgre.Api.Data;     // Database context.
+using ParaIgre.Api.Mapping;  // Contains methods to convert entities to DTOs.
 
-namespace ParaIgre.Api.Endpoints;
-
-public static class TagsEndpoints
+namespace ParaIgre.Api.Endpoints
 {
-    public static RouteGroupBuilder MapTagsEndpoints(this WebApplication app)
+    // Static class to hold tag-related endpoints.
+    public static class TagsEndpoints
     {
-        var group = app.MapGroup("tags");
+        // Extension method that maps endpoints for tags onto the WebApplication.
+        public static RouteGroupBuilder MapTagsEndpoints(this WebApplication app)
+        {
+            // Map a group of endpoints with the base URL "tags".
+            var group = app.MapGroup("tags");
 
-        group.MapGet("/", async (ParaIgreContext dbContext) =>
-            await dbContext.Tags
-                .Select(tag => tag.ToDTO())
-                .AsNoTracking()
-                .ToListAsync());
+            // GET /tags
+            // Maps a GET request to retrieve all tags.
+            group.MapGet("/", async (ParaIgreContext dbContext) =>
+                // Query the database for tags.
+                // For each tag, convert it to a TagDTO using the ToDTO() extension method.
+                // AsNoTracking() indicates that the entities are not tracked for changes.
+                // ToListAsync() executes the query asynchronously and returns the list of DTOs.
+                await dbContext.Tags
+                    .Select(tag => tag.ToDTO())
+                    .AsNoTracking()
+                    .ToListAsync()
+            );
 
-        return group;
+            // Return the group of endpoints.
+            return group;
+        }
     }
 }
