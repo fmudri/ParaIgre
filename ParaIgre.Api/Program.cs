@@ -9,6 +9,16 @@ using ParaIgre.Api.Endpoints;  // Contains extension methods to map endpoints.
 // Create the web application builder which sets up the configuration, services, and middleware.
 var builder = WebApplication.CreateBuilder(args);
 
+// Add CORS services
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ReactAppPolicy",
+        builder => builder
+            .WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 // Retrieve the connection string for the database from configuration settings.
 var connString = builder.Configuration.GetConnectionString("ParaIgre");
 
@@ -18,6 +28,9 @@ builder.Services.AddSqlite<ParaIgreContext>(connString);
 
 // Build the WebApplication instance from the builder.
 var app = builder.Build();
+
+// Enable CORS
+app.UseCors("ReactAppPolicy");
 
 // Map the game-related endpoints onto the application.
 // This registers the routes defined in the GamesEndpoints class.

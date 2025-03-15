@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ParaIgre.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ec0be4ff717fb571f82f4c90d4bb7588d0a7ff2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+421601ccda861083372015669647398efb6217d2")]
 [assembly: System.Reflection.AssemblyProductAttribute("ParaIgre.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ParaIgre.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
