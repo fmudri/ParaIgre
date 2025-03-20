@@ -5,6 +5,10 @@
 // Import our data context and endpoints for setting up the application.
 using ParaIgre.Api.Data;       // Contains the ParaIgreContext (database context).
 using ParaIgre.Api.Endpoints;  // Contains extension methods to map endpoints.
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using ParaIgre.Api.Services;
+using System.Text;
 
 // Create the web application builder which sets up the configuration, services, and middleware.
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +23,28 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
+// Add Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!)),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+// Add Authorization
+builder.Services.AddAuthorization();
+
+// Register AuthService
+builder.Services.AddScoped<AuthService>();
+
 // Retrieve the connection string for the database from configuration settings.
 var connString = builder.Configuration.GetConnectionString("ParaIgre");
 
@@ -32,12 +58,13 @@ var app = builder.Build();
 // Enable CORS
 app.UseCors("ReactAppPolicy");
 
-// Map the game-related endpoints onto the application.
-// This registers the routes defined in the GamesEndpoints class.
-app.MapGamesEndpoints();
+// Enable Authentication & Authorization
+app.UseAuthentication();
+app.UseAuthorization();
 
-// Map the tag-related endpoints onto the application.
-// This registers the routes defined in the TagsEndpoints class.
+// Map endpoints
+app.MapAuthEndpoints();
+app.MapGamesEndpoints();
 app.MapTagsEndpoints();
 
 // Migrate the database asynchronously.

@@ -1,0 +1,44 @@
+### Register a new user
+POST http://localhost:5165/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "password123"
+}
+
+### Login with the registered user
+POST http://localhost:5165/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "password123"
+}
+
+### Login with wrong password (should fail)
+POST http://localhost:5165/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "wrongpassword"
+}
+
+### Register with existing username (should fail)
+POST http://localhost:5165/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "anotherpassword"
+}
+
+### Register with short password (should fail)
+POST http://localhost:5165/auth/register
+Content-Type: application/json
+
+{
+    "username": "newuser",
+    "password": "short"
+} 

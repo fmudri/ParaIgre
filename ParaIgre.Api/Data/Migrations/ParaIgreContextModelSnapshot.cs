@@ -102,6 +102,30 @@ namespace ParaIgre.Api.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ParaIgre.Api.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("ParaIgre.Api.Entities.Game", b =>
                 {
                     b.HasOne("ParaIgre.Api.Entities.Tag", "Tag")

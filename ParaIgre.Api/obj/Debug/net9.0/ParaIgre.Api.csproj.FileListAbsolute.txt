@@ -149,3 +149,11 @@ D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\paraigrefront\package-lock
 D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\paraigrefront\package.json
 D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\paraigrefront\public\manifest.json
 D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\Microsoft.AspNetCore.SpaServices.Extensions.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+D:\Projekti\C#\ParaIgre\ParaIgre.Api\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll

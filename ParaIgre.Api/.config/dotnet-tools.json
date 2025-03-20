@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "dotnet-httpie": {
+      "version": "0.9.0",
+      "commands": [
+        "dotnet-http"
+      ],
+      "rollForward": false
+    }
+  }
+}

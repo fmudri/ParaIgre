@@ -10,6 +10,8 @@ public class ParaIgreContext(DbContextOptions<ParaIgreContext> options) : DbCont
 
     public DbSet<Tag> Tags => Set<Tag>();
 
+    public DbSet<User> Users => Set<User>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Tag>().HasData
